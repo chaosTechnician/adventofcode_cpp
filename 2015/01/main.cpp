@@ -25,6 +25,8 @@ int main(int argc, char** argv)
 		cout << "First went into the basement at position " << pos << "." << endl;
 	else
 		cout << "Never went into the basement." << endl;
+
+	return 0;
 }
 
 int FindFinalFloor(const string& map, int startingFloor)
@@ -41,7 +43,7 @@ int FindFinalFloor(const string& map, int startingFloor)
 int FindFirstBasementPosition(const string& map, int startingFloor)
 {
 	int floor = startingFloor;
-	int position = 0;
+	size_t position = 0;
 	while (floor >= 0 && position < map.length())
 	{
 		floor = GetNextFloor(floor, map[position++]);
