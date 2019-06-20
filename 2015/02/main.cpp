@@ -27,6 +27,7 @@ int main(int argc, char** argv)
 			ribbonLength += GetRibbonLength(l, w, h);
 		}
 	}
+	file.close();
 
 	cout << "Gifts require " << paperArea << " square feet of paper and " << ribbonLength << " feet of ribbon." << endl;
 	return 0;
