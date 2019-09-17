@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 
-enum Action
+enum class Action
 {
 	TurnOn,
 	TurnOff,
@@ -22,7 +22,7 @@ int main(int argc, char* argv)
 {
 	std::string line;
 	bool* lights = new bool[FIELD_WIDTH * FIELD_HEIGHT];
-	ChangeLights(lights, 0, 0, FIELD_WIDTH - 1, FIELD_HEIGHT - 1, TurnOff);
+	ChangeLights(lights, 0, 0, FIELD_WIDTH - 1, FIELD_HEIGHT - 1, Action::TurnOff);
 
 	int* lightsWithBrightness = new int [FIELD_WIDTH * FIELD_HEIGHT];
 	TurnOffLights(lightsWithBrightness);
@@ -50,18 +50,18 @@ int main(int argc, char* argv)
 
 		if (token == "on")
 		{
-			ChangeLights(lights, x1, y1, x2, y2, TurnOn);
-			ChangeLights(lightsWithBrightness, x1, y1, x2, y2, TurnOn);
+			ChangeLights(lights, x1, y1, x2, y2, Action::TurnOn);
+			ChangeLights(lightsWithBrightness, x1, y1, x2, y2, Action::TurnOn);
 		}
 		if (token == "off")
 		{
-			ChangeLights(lights, x1, y1, x2, y2, TurnOff);
-			ChangeLights(lightsWithBrightness, x1, y1, x2, y2, TurnOff);
+			ChangeLights(lights, x1, y1, x2, y2, Action::TurnOff);
+			ChangeLights(lightsWithBrightness, x1, y1, x2, y2, Action::TurnOff);
 		}
 		if (token == "toggle")
 		{
-			ChangeLights(lights, x1, y1, x2, y2, Toggle);
-			ChangeLights(lightsWithBrightness, x1, y1, x2, y2, Toggle);
+			ChangeLights(lights, x1, y1, x2, y2, Action::Toggle);
+			ChangeLights(lightsWithBrightness, x1, y1, x2, y2, Action::Toggle);
 		}
 	}
 	file.close();
@@ -101,13 +101,13 @@ void ChangeLights(bool* lights, int x1, int y1, int x2, int y2, Action action)
 		{
 			switch (action)
 			{
-			case TurnOn:
+			case Action::TurnOn:
 				lights[x * FIELD_HEIGHT + y] = true;
 				break;
-			case TurnOff:
+			case Action::TurnOff:
 				lights[x * FIELD_HEIGHT + y] = false;
 				break;
-			case Toggle:
+			case Action::Toggle:
 				lights[x * FIELD_HEIGHT + y] = !lights[x * FIELD_HEIGHT + y];
 				break;
 			}
@@ -134,16 +134,16 @@ void ChangeLights(int* lights, int x1, int y1, int x2, int y2, Action action)
 		{
 			switch (action)
 			{
-			case TurnOn:
+			case Action::TurnOn:
 				lights[x * FIELD_HEIGHT + y] += 1;
 				break;
-			case TurnOff:
+			case Action::TurnOff:
 				if (lights[x * FIELD_HEIGHT + y] > 0)
 				{
 					lights[x * FIELD_HEIGHT + y] -= 1;
 				}
 				break;
-			case Toggle:
+			case Action::Toggle:
 				lights[x * FIELD_HEIGHT + y] += 2;
 				break;
 			}
